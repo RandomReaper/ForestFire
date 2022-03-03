@@ -1,0 +1,1 @@
+# ForestFire in Scala.js
