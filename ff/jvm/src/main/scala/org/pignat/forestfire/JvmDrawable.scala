@@ -4,7 +4,7 @@ import java.awt.{BorderLayout, Color, Dimension, Label}
 import javax.swing.{JFrame, WindowConstants}
 import java.awt.Canvas
 import java.awt.image.BufferedImage
-
+import java.awt.Color
 
 
 class JvmDrawable extends Drawable{
@@ -20,12 +20,13 @@ class JvmDrawable extends Drawable{
   frame.setVisible(true)
   val b = new BufferedImage(320, 240, BufferedImage.TYPE_INT_RGB)
 
-  override def getHeight(): Int = frame.getWidth
+  override def height(): Int = frame.getHeight
 
-  override def getWidth(): Int = frame.getHeight
+  override def width(): Int = frame.getWidth
 
-  override def setPixel(x: Integer, y: Integer, p: Color): Unit = {
-    c.getGraphics().setColor(p)
-    c.getGraphics().drawLine(x, y, x+1, y+1)
+  override def setPixel(x: Integer, y: Integer, r: Int, g: Int, b: Int): Unit = {
+    val gr = c.getGraphics()
+    gr.setColor(new Color(r,g,b))
+    gr.drawLine(x, y, x+1, y+1)
   }
 }
