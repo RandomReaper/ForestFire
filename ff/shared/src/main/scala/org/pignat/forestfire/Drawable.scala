@@ -25,6 +25,5 @@ trait Drawable {
 
     drawFilledRect(10, 10, 10, 10, new Color(255, 255, 255))
     drawFilledRect(20, 20, 10, 10, new Color(255, 255, 255, 127))
-
   }
 }

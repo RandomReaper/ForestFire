@@ -8,7 +8,7 @@ class JSDrawable(id: String) extends Drawable {
   val c = document.getElementById(id).asInstanceOf[html.Canvas]
   val ctx = c.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
 
-  private def color(c:Color) : String = f"rgba(${c.r},${c.g},${c.b},${c.a/255.0})"
+  private def color(c: Color): String = f"rgba(${c.r},${c.g},${c.b},${c.a / 255.0})"
 
   override def height(): Int = c.height
 

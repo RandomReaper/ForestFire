@@ -33,12 +33,13 @@ class JvmDrawable extends Drawable {
     val g = bufferedImage.getGraphics()
     g.setColor(new java.awt.Color(c.r, c.g, c.b, c.a))
     g.drawLine(x, y, x + 1, y + 1)
-    frame.repaint()
+    canvas.repaint(x, y, x + 1, y + 1)
   }
 
   override def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer, c: forestfire.Color): Unit = {
     val g = bufferedImage.getGraphics()
     g.setColor(new java.awt.Color(c.r, c.g, c.b, c.a))
     g.fillRect(x, y, w, h)
+    canvas.repaint(x, y, w, h)
   }
 }

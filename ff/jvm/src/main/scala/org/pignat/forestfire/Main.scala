@@ -1,10 +1,17 @@
 package org.pignat.forestfire
 
+import java.time.Instant
+
+
 object Main {
   def main(args: Array[String]): Unit = {
-    val lib = new MyLibrary
-    println(lib.sq(2))
     val w = new JvmDrawable
     w.test()
+    val f = new ForestFire(w)
+
+    while (true) {
+      f.step(System.currentTimeMillis() / 100)
+      Thread.sleep(100)
+    }
   }
 }
