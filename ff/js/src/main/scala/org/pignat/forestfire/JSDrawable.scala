@@ -18,7 +18,7 @@ class JSDrawable(id: String) extends Drawable {
   }
 
   override def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer, c: Color): Unit = {
-    ctx.fillStyle = f"rgba(${c.r},${c.g},${c.b},${c.a})"
+    ctx.fillStyle = f"rgba(${c.r},${c.g},${c.b},${c.a/255.0})"
     ctx.fillRect(x.toDouble, y.toDouble, w.toDouble, h.toDouble)
   }
 }
