@@ -17,12 +17,12 @@ object Main {
   }
 
   def main(args: Array[String]): Unit = {
-    appendCanvas(document.body, "cvs", 320, 240)
+    appendCanvas(document.body, "cvs", 640, 480)
     val c = new JSDrawable("cvs")
     c.test()
     val f = new ForestFire(c)
-    setInterval(100) {
-      f.step(System.currentTimeMillis() / 100)
+    setInterval(10) {
+      f.step(System.currentTimeMillis() / 10)
     }
   }
 }

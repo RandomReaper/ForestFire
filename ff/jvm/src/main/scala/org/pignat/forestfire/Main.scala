@@ -10,8 +10,8 @@ object Main {
     val f = new ForestFire(w)
 
     while (true) {
-      f.step(System.currentTimeMillis() / 100)
-      Thread.sleep(100)
+      f.step(System.currentTimeMillis() / 10)
+      Thread.sleep(10)
     }
   }
 }
