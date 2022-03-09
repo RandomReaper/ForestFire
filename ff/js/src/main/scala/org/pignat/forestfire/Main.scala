@@ -11,7 +11,7 @@ object Main {
     targetNode.appendChild(parNode)
   }
 
-  def appendCanvas(targetNode: dom.Node, id:String, width:Int, height:Int): Unit = {
+  def appendCanvas(targetNode: dom.Node, id: String, width: Int, height: Int): Unit = {
     val n = document.createElement("canvas")
     n.id = id
     n.setAttribute("width", width.toString)
