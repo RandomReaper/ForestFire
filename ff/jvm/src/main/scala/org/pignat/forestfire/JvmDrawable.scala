@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage
 
 class JvmDrawable extends Drawable {
 
-  val frame = new JFrame("FrameDemo")
+  val frame = new JFrame("ForestFire")
   frame.getContentPane()
   frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   var bufferedImage = new BufferedImage(320, 240, BufferedImage.TYPE_INT_RGB)
