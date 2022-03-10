@@ -8,10 +8,12 @@ object Main {
     val w = new JvmDrawable
     w.test()
     val f = new ForestFire(w)
+    val t = 10
 
     while (true) {
-      f.step(System.currentTimeMillis() / 10)
-      Thread.sleep(10)
+      f.step(System.currentTimeMillis() / t)
+      Thread.sleep(t)
     }
   }
 }
+

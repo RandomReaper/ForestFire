@@ -5,7 +5,7 @@ import scala.math.min
 class ForestFire(drawable: Drawable) {
   drawable.drawFilledRect(0, 0, drawable.width(), drawable.height(), new Color(0, 0, 0))
 
-  val sz = 5
+  val sz = 2
 
   val burnTime = 25
   val random = new Random()
@@ -18,7 +18,7 @@ class ForestFire(drawable: Drawable) {
   var fires = 0.0
 
   def resize(): Unit = {
-    if (drawable.width() == mem.length && drawable.height() == mem(0).length) {
+    if (drawable.width() / (sz + 1) == mem.length && drawable.height() / (sz + 1) == mem(0).length) {
       return
     }
 
@@ -83,14 +83,17 @@ class ForestFire(drawable: Drawable) {
       }
     }
 
-    val out = mem.map(identity)
+    var out = Array.ofDim[Int](drawable.width() / (sz + 1), drawable.height() / (sz + 1))
+    for (x <- 0 until min(mem.length, out.length); y <- 0 until min(mem(0).length, out(0).length)) {
+      out(x)(y) = mem(x)(y)
+    }
 
     for (x <- mem.indices; y <- mem(0).indices; a <- -1 to 1; b <- -1 to 1) {
-      if (x + a < 0 || x + a >= mem.length || y + b < 0 || y + b >= mem(0).length) {
+      if (x + a < 0 || x + a >= mem.length || y + b < 0 || y + b >= mem(0).length || (a==0 && b==0)) {
 
       } else {
         if (mem(x)(y) == burnTime) {
-          if ((a != 0 || b != 0) && mem(x + a)(y + b) > 0 && mem(x + a)(y + b) < burnTime) {
+          if (mem(x + a)(y + b) > 0 && mem(x + a)(y + b) < burnTime) {
             out(x)(y) = burnTime - 1
           }
         }
@@ -100,5 +103,4 @@ class ForestFire(drawable: Drawable) {
     mem = out
     draw()
   }
-
 }
