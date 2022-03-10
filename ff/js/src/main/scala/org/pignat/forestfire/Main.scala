@@ -18,7 +18,7 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     appendCanvas(document.body, "cvs", 640, 480)
-    val c = new JSDrawable("cvs")
+    val c = new JSDrawable("cvs", true)
     c.test()
     val f = new ForestFire(c)
     setInterval(10) {

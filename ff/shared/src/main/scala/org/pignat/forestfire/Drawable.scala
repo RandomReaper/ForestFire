@@ -9,6 +9,10 @@ trait Drawable {
 
   def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer, c: Color)
 
+  def startDrawing() = {}
+
+  def stopDrawing() = {}
+
   def test() = {
     for (x <- 0 until width() / 2; y <- 0 until height() / 2) {
       setPixel(x, y, new Color(0, 0, 0))
