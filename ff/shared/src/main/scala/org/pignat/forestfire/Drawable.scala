@@ -5,29 +5,40 @@ trait Drawable {
 
   def width(): Int
 
-  def setPixel(x: Integer, y: Integer, c: Color): Unit
+  def setColor(c: Color): Unit
 
-  def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer, c: Color)
+  def setPixel(x: Integer, y: Integer): Unit
+
+  def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer)
 
   def startDrawing() = {}
 
   def stopDrawing() = {}
 
   def test() = {
+    startDrawing()
     for (x <- 0 until width() / 2; y <- 0 until height() / 2) {
-      setPixel(x, y, new Color(0, 0, 0))
+      setColor(new Color(0, 0, 0))
+      setPixel(x, y)
     }
     for (x <- width() / 2 until width(); y <- 0 until height() / 2) {
-      setPixel(x, y, new Color(255, 0, 0))
+      setColor(new Color(255, 0, 0))
+      setPixel(x, y)
     }
     for (x <- 0 until width() / 2; y <- height() / 2 until height()) {
-      setPixel(x, y, new Color(0, 255, 0))
+      setColor(new Color(0, 255, 0))
+      setPixel(x, y)
     }
     for (x <- width() / 2 until width(); y <- height() / 2 until height()) {
-      setPixel(x, y, new Color(0, 0, 255))
+      setColor(new Color(0, 0, 255))
+      setPixel(x, y)
     }
 
-    drawFilledRect(10, 10, 10, 10, new Color(255, 255, 255))
-    drawFilledRect(20, 20, 10, 10, new Color(255, 255, 255, 127))
+    setColor(new Color(255, 255, 255))
+    drawFilledRect(10, 10, 10, 10)
+    setColor(new Color(255, 255, 255, 127))
+    drawFilledRect(20, 20, 10, 10)
+
+    stopDrawing()
   }
 }

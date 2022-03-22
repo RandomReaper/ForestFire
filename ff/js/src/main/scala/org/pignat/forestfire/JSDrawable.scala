@@ -31,19 +31,22 @@ class JSDrawable(id: String, fullScreen: Boolean) extends Drawable {
     resize()
   }
 
-  private def color(c: Color): String = f"rgba(${c.r},${c.g},${c.b},${c.a / 255.0})"
+  //private def color(c: Color): String = f"rgba(${c.r},${c.g},${c.b},${c.a / 255.0})"
+  private def color(c: Color): String = "rgba(" + c.r + "," + c.g + "," + c.b + "," + c.a / 255.0
 
   override def height(): Int = canvas.height
 
   override def width(): Int = canvas.width
 
-  override def setPixel(x: Integer, y: Integer, c: Color): Unit = {
+  override def setColor(c: Color): Unit = {
     buf.fillStyle = color(c)
+  }
+
+  override def setPixel(x: Integer, y: Integer): Unit = {
     buf.fillRect(x.toDouble, y.toDouble, 1, 1)
   }
 
-  override def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer, c: Color): Unit = {
-    buf.fillStyle = color(c)
+  override def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer): Unit = {
     buf.fillRect(x.toDouble, y.toDouble, w.toDouble, h.toDouble)
   }
 

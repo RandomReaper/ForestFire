@@ -1,8 +1,5 @@
 package org.pignat.forestfire
 
-import java.time.Instant
-
-
 object Main {
   def main(args: Array[String]): Unit = {
     val w = new JvmDrawable

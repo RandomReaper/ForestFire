@@ -34,19 +34,27 @@ class JvmDrawable extends Drawable {
 
   override def width(): Int = frame.getWidth
 
-  override def setPixel(x: Integer, y: Integer, c: org.pignat.forestfire.Color): Unit = {
-    val g = bufferedImage.getGraphics()
+  var g: Graphics = null
+
+  override def startDrawing(): Unit = {
+    super.startDrawing()
+    g = bufferedImage.getGraphics()
+  }
+
+  override def setColor(c: org.pignat.forestfire.Color): Unit = {
     g.setColor(new java.awt.Color(c.r, c.g, c.b, c.a))
+  }
+
+  override def setPixel(x: Integer, y: Integer): Unit = {
     g.drawLine(x, y, x + 1, y + 1)
   }
 
-  override def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer, c: forestfire.Color): Unit = {
-    val g = bufferedImage.getGraphics()
-    g.setColor(new java.awt.Color(c.r, c.g, c.b, c.a))
+  override def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer): Unit = {
     g.fillRect(x, y, w, h)
   }
 
   override def stopDrawing(): Unit = {
+    g = null
     panel.repaint()
     super.stopDrawing()
   }

@@ -1,9 +1,13 @@
 package org.pignat.forestfire
+
 import scala.util.Random
 import scala.math.min
 
 class ForestFire(drawable: Drawable) {
-  drawable.drawFilledRect(0, 0, drawable.width(), drawable.height(), new Color(0, 0, 0))
+  drawable.startDrawing()
+  drawable.setColor(new Color(0, 0, 0))
+  drawable.drawFilledRect(0, 0, drawable.width(), drawable.height())
+  drawable.stopDrawing()
 
   val sz = 2
 
@@ -33,15 +37,22 @@ class ForestFire(drawable: Drawable) {
 
   def draw(): Unit = {
     drawable.startDrawing()
-    drawable.drawFilledRect(0, 0, drawable.width(), drawable.height(), new Color(0, 0, 0))
+    drawable.setColor(new Color(0, 0, 0))
+    drawable.drawFilledRect(0, 0, drawable.width(), drawable.height())
     val c0 = new Color(0, 0, 0)
     val c1 = new Color(0, 255, 0)
     val c2 = new Color(255, 0, 0)
     for (x <- mem.indices; y <- mem(0).indices) {
       mem(x)(y) match {
-        case 0 => drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz, c0)
-        case `burnTime` => drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz, c1)
-        case v: Int => drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz, new Color(v * 255 / burnTime, 0, 0));
+        case 0 =>
+          drawable.setColor(c0)
+          drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz)
+        case `burnTime` =>
+          drawable.setColor(c1)
+          drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz)
+        case v: Int =>
+          drawable.setColor(new Color(v * 255 / burnTime, 0, 0))
+          drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz);
       }
     }
     drawable.stopDrawing()
@@ -89,7 +100,7 @@ class ForestFire(drawable: Drawable) {
     }
 
     for (x <- mem.indices; y <- mem(0).indices; a <- -1 to 1; b <- -1 to 1) {
-      if (x + a < 0 || x + a >= mem.length || y + b < 0 || y + b >= mem(0).length || (a==0 && b==0)) {
+      if (x + a < 0 || x + a >= mem.length || y + b < 0 || y + b >= mem(0).length || (a == 0 && b == 0)) {
 
       } else {
         if (mem(x)(y) == burnTime) {
