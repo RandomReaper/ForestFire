@@ -9,24 +9,25 @@ class ForestFire(drawable: Drawable) {
   drawable.drawFilledRect(0, 0, drawable.width(), drawable.height())
   drawable.stopDrawing()
 
-  val sz = 2
+  val sz = 3
+  val spc = 1
 
   val burnTime = 25
   val random = new Random()
 
-  val chanceTreePercent = 0.01
-  val chanceFirePercent = 0.0001
+  val chanceTree = 0.001
+  val chanceFire = chanceTree/100
 
-  var mem = Array.ofDim[Int](drawable.width() / (sz + 1), drawable.height() / (sz + 1))
+  var mem = Array.ofDim[Int](drawable.width() / (sz + spc), drawable.height() / (sz + spc))
   var trees = 0.0
   var fires = 0.0
 
   def resize(): Unit = {
-    if (drawable.width() / (sz + 1) == mem.length && drawable.height() / (sz + 1) == mem(0).length) {
+    if (drawable.width() / (sz + spc) == mem.length && drawable.height() / (sz + spc) == mem(0).length) {
       return
     }
 
-    val out = Array.ofDim[Int](drawable.width() / (sz + 1), drawable.height() / (sz + 1))
+    val out = Array.ofDim[Int](drawable.width() / (sz + spc), drawable.height() / (sz + spc))
 
     for (x <- 0 until min(mem.length, out.length); y <- 0 until min(mem(0).length, out(0).length)) {
       out(x)(y) = mem(x)(y)
@@ -46,13 +47,13 @@ class ForestFire(drawable: Drawable) {
       mem(x)(y) match {
         case 0 =>
           drawable.setColor(c0)
-          drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz)
+          drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz)
         case `burnTime` =>
           drawable.setColor(c1)
-          drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz)
+          drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz)
         case v: Int =>
           drawable.setColor(new Color(v * 255 / burnTime, 0, 0))
-          drawable.drawFilledRect((sz + 1) * x, (sz + 1) * y, sz, sz);
+          drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz);
       }
     }
     drawable.stopDrawing()
@@ -63,10 +64,11 @@ class ForestFire(drawable: Drawable) {
     if (mem.length == 0 || mem(0).length == 0) {
       return
     }
-    val tot = drawable.width() * drawable.height()
+    val tot = mem.length * mem(0).length
 
-    trees += random.nextDouble() * tot * chanceTreePercent / 100.0
-    fires += random.nextDouble() * tot * chanceFirePercent / 100.0
+    trees += 1.0 * tot * chanceTree
+
+    fires += 1.0 * tot * chanceFire
 
     for (i <- 0 until trees.toInt) {
       val x = random.nextInt(mem.length)
