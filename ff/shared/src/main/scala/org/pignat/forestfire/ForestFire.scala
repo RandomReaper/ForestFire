@@ -16,7 +16,9 @@ class ForestFire(drawable: Drawable) {
   val random = new Random()
 
   val chanceTree = 0.001
-  val chanceFire = chanceTree/100
+  val chanceFire = chanceTree / 100
+
+  val colorMap = (0 to burnTime).map(v => if (v == burnTime) new Color(0, 255, 0) else new Color(v * 255 / burnTime, 0, 0))
 
   var mem = Array.ofDim[Int](drawable.width() / (sz + spc), drawable.height() / (sz + spc))
   var trees = 0.0
@@ -40,20 +42,12 @@ class ForestFire(drawable: Drawable) {
     drawable.startDrawing()
     drawable.setColor(new Color(0, 0, 0))
     drawable.drawFilledRect(0, 0, drawable.width(), drawable.height())
-    val c0 = new Color(0, 0, 0)
-    val c1 = new Color(0, 255, 0)
-    val c2 = new Color(255, 0, 0)
-    for (x <- mem.indices; y <- mem(0).indices) {
-      mem(x)(y) match {
-        case 0 =>
-          drawable.setColor(c0)
-          drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz)
-        case `burnTime` =>
-          drawable.setColor(c1)
-          drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz)
-        case v: Int =>
-          drawable.setColor(new Color(v * 255 / burnTime, 0, 0))
+    for (c <- colorMap.indices) {
+      drawable.setColor(colorMap(c))
+      for (x <- mem.indices; y <- mem(0).indices) {
+        if (mem(x)(y) == c) {
           drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz);
+        }
       }
     }
     drawable.stopDrawing()
