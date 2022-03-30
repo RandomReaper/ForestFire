@@ -1,5 +1,6 @@
-package org.pignat.forestfire
+package org.pignat.utils
 
+import org.pignat.utils.Drawable
 import org.scalajs.dom
 import org.scalajs.dom.{UIEvent, document, html}
 

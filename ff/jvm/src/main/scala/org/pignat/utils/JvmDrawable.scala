@@ -1,9 +1,9 @@
-package org.pignat.forestfire
+package org.pignat.utils
 
-import org.pignat.forestfire
+import org.pignat.utils.Drawable
 
 import java.awt.{BorderLayout, Canvas, Color, Dimension, Graphics, Label}
-import javax.swing.{JFrame, WindowConstants, JPanel}
+import javax.swing.{JFrame, JPanel, WindowConstants}
 import java.awt.image.BufferedImage
 
 class JvmDrawable extends Drawable {
@@ -41,7 +41,7 @@ class JvmDrawable extends Drawable {
     g = bufferedImage.getGraphics()
   }
 
-  override def setColor(c: org.pignat.forestfire.Color): Unit = {
+  override def setColor(c: org.pignat.utils.Color): Unit = {
     g.setColor(new java.awt.Color(c.r, c.g, c.b, c.a))
   }
 

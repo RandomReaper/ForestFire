@@ -1,13 +1,21 @@
-package org.pignat.forestfire
+package org.pignat.playgrounds
+
+import org.pignat.utils.{Drawable, PlayGround, Color}
 
 import scala.util.Random
 import scala.math.min
 
-class ForestFire(drawable: Drawable) {
-  drawable.startDrawing()
-  drawable.setColor(new Color(0, 0, 0))
-  drawable.drawFilledRect(0, 0, drawable.width(), drawable.height())
-  drawable.stopDrawing()
+class ForestFire() extends PlayGround {
+  var drawable: Drawable = null
+
+  def init(d: Drawable): Unit = {
+    drawable = d
+    drawable.startDrawing()
+    drawable.setColor(new Color(0, 0, 0))
+    drawable.drawFilledRect(0, 0, drawable.width(), drawable.height())
+    drawable.stopDrawing()
+    resize()
+  }
 
   val sz = 3
   val spc = 1
@@ -20,7 +28,7 @@ class ForestFire(drawable: Drawable) {
 
   val colorMap = (0 to burnTime).map(v => if (v == burnTime) new Color(0, 255, 0) else new Color(v * 255 / burnTime, 0, 0))
 
-  var mem = Array.ofDim[Int](drawable.width() / (sz + spc), drawable.height() / (sz + spc))
+  var mem = Array.ofDim[Int](0, 0)
   var trees = 0.0
   var fires = 0.0
 
@@ -46,7 +54,7 @@ class ForestFire(drawable: Drawable) {
       drawable.setColor(colorMap(c))
       for (x <- mem.indices; y <- mem(0).indices) {
         if (mem(x)(y) == c) {
-          drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz);
+          drawable.drawFilledRect((sz + spc) * x, (sz + spc) * y, sz, sz)
         }
       }
     }
@@ -90,7 +98,7 @@ class ForestFire(drawable: Drawable) {
       }
     }
 
-    var out = Array.ofDim[Int](drawable.width() / (sz + 1), drawable.height() / (sz + 1))
+    val out = Array.ofDim[Int](drawable.width() / (sz + 1), drawable.height() / (sz + 1))
     for (x <- 0 until min(mem.length, out.length); y <- 0 until min(mem(0).length, out(0).length)) {
       out(x)(y) = mem(x)(y)
     }

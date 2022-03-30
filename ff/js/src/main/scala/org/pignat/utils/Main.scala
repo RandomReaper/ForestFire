@@ -1,10 +1,10 @@
-package org.pignat.forestfire
+package org.pignat.utils
 
+import org.pignat.playgrounds.ForestFire
 import org.scalajs.dom
 import org.scalajs.dom.document
 
-import scala.scalajs.js.Date
-import scala.scalajs.js.timers._
+import scala.scalajs.js.timers.setInterval
 
 object Main {
 
@@ -18,8 +18,8 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     appendCanvas(document.body, "cvs", 640, 480)
-    val c = new JSDrawable("cvs", true)
-    val f = new ForestFire(c)
+    val f = Selector.select("ForestFire", new JSDrawable("cvs", true))
+
     setInterval(100) {
       f.step(System.currentTimeMillis() / 100)
     }

@@ -1,11 +1,12 @@
-package org.pignat.forestfire
+package org.pignat.utils
+
+import org.pignat.playgrounds.ForestFire
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val w = new JvmDrawable
-    w.test()
-    val f = new ForestFire(w)
-    val t = 10
+
+    val f = Selector.select("ForestFire", new JvmDrawable)
+    val t = 500
 
     while (true) {
       f.step(System.currentTimeMillis() / t)
@@ -13,4 +14,3 @@ object Main {
     }
   }
 }
-

@@ -1,4 +1,4 @@
-package org.pignat.forestfire
+package org.pignat.utils
 
 trait Drawable {
   def height(): Int
@@ -10,6 +10,9 @@ trait Drawable {
   def setPixel(x: Integer, y: Integer): Unit
 
   def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer)
+  def drawFilledRectXY(x1: Integer, y1: Integer, x2: Integer, y2: Integer): Unit = {
+    drawFilledRect(x1+(x2-x1)/2, y1+(y2-y1)/2, x2-x1, y2-y1)
+  }
 
   def startDrawing() = {}
 
