@@ -39,13 +39,13 @@ class Mondrian() extends PlayGround {
   }
 
   def draw(): Unit = {
-    val x = (0 +: (0 to 2 + random.nextInt(5)).map(x => random.nextInt(mem.length)) :+ (mem.length -1)).map(_*(sz+spc))
-    val y = (0 +: (0 to 2 + random.nextInt(5)).map(x => random.nextInt(mem(0).length)) :+ (mem(0).length -1)).map(_*(sz+spc))
+    val x = (0 +: (0 to 2 + random.nextInt(5)).map(x => random.nextInt(mem.length)) :+ (mem.length - 1)).map(_ * (sz + spc))
+    val y = (0 +: (0 to 2 + random.nextInt(5)).map(x => random.nextInt(mem(0).length)) :+ (mem(0).length - 1)).map(_ * (sz + spc))
     drawable.startDrawing()
     drawable.setColor(new Color(0, 0, 0))
     drawable.drawFilledRect(0, 0, drawable.width(), drawable.height())
-    drawable.setColor(new Color(255,255,255))
-    for (a <- x.init.zip(x.tail) ; b <- y.init.zip(y.tail)) {
+    drawable.setColor(new Color(255, 255, 255))
+    for (a <- x.init.zip(x.tail); b <- y.init.zip(y.tail)) {
       val r = random.nextInt(255)
       drawable.setColor(new Color(r, r, r))
       drawable.drawFilledRectXY(a._1, b._1, a._2, b._2)

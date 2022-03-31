@@ -11,7 +11,11 @@ trait Drawable {
 
   def drawFilledRect(x: Integer, y: Integer, w: Integer, h: Integer)
   def drawFilledRectXY(x1: Integer, y1: Integer, x2: Integer, y2: Integer): Unit = {
-    drawFilledRect(x1+(x2-x1)/2, y1+(y2-y1)/2, x2-x1, y2-y1)
+    val rx1 = if (x2 > x1) x1 else x2
+    val rx2 = if (x2 < x1) x1 else x2
+    val ry1 = if (y2 > y1) y1 else y2
+    val ry2 = if (y2 < y1) y1 else y2
+    drawFilledRect(rx1 + (rx2 - rx1) / 2, ry1 + (ry2 - ry1) / 2, rx2 - rx1, ry2 - ry1)
   }
 
   def startDrawing() = {}
